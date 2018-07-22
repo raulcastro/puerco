@@ -39,7 +39,7 @@ This is the file you need to edit to change the look of the theme.
 .section {
   position: relative;
   z-index: 999;
-  padding: 96px 0px;
+  padding: 55px 0px;
 }
 
 .section.section-white {
@@ -208,7 +208,7 @@ This is the file you need to edit to change the look of the theme.
   margin-right: auto;
   line-height: 26px !important;
   opacity: .8;
-  margin-bottom: 24px;
+  margin-bottom: 50px;
 }
 
 .section-head img {
@@ -12697,4 +12697,7 @@ form.search_form small {
 
 ul.instagram_widget li img {
   width: 100%;
+}
+.background-color-5 {
+  background-color: #cc00cc;
 }

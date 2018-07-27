@@ -52,45 +52,37 @@ class Layout_View
             ?>
         </head>
 		<body>
-			<div class="page">
-				<?php 
-                echo self::getCommonHeader();
-                ?>
-                <!--========================================================
-                                  CONTENT
-                =========================================================-->
-            		<main>
-                    	<?php
-        			    switch ($section) 
-        			    {
-                        case 'index':
-                            echo self :: getIndexPolaroids();
-                            echo self :: getRule();
-                            echo self :: getIndexWelcome();
-                            echo self :: getIndexPreAbout();
-                            echo self :: getIndexContact();
-                            echo self :: getIndexGallery();
-        				    break;
+        		<div class="loading text-center vertical-middle">
+                <div class="row"><img src="/assets/images/loading.gif" width="200" alt="Loader logo" class="loader" />
+                
+                </div>
+            </div>
+			<?php 
+            echo self::getCommonHeader();
+            ?>
+            	<?php
+		    switch ($section) 
+		    {
+                case 'index':
+                    echo self::getIndexSlider();
+                    echo self::getIndexCovers();
+                    echo self::getIndexClients();
+                    echo self::getIndexGaleries();
+			    break;
         				    
-                        case 'services':
-                            echo self :: getServiceSectionOne();
-                            echo self :: getRule();
-                            echo self :: getServicesPolaroids();
-                            echo self :: getIndexWelcome();
-                            echo self :: getIndexPreAbout();
-                            echo self :: getIndexContact();
-                            echo self :: getIndexGallery();
-                        break;
+                case 'about':
+                    echo self::getAboutBreadCrumb();
+                    echo self::getAboutDescription();
+                    echo self::getAboutProcess();
+                break;
         				
-        				    default:
-        				    break;
-        			    }
-                    ?>
-            		</main>
+			    default:
+			    break;
+		    }
+            ?>
             		<?php
                     echo self::getFooter(); 
                 ?>
-			</div>
 			<?php
 			echo self::getCommonScripts();
 			echo self::getGoogleAnalytics()
@@ -118,26 +110,21 @@ class Layout_View
     {
         ob_start();
         ?>
-    		<script src="/js/jquery.js"></script>
-        <script src="/js/jquery-migrate-1.2.1.js"></script>
-        
-            <!--[if lt IE 9]>
-            <html class="lt-ie9">
-            <div style=' clear: both; text-align:center; position: relative;'>
-                <a href="http://windows.microsoft.com/en-US/internet-explorer/..">
-                    <img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820"
-                         alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/>
-                </a>
-            </div>
-            <script src="js/html5shiv.js"></script>
-            <![endif]-->
-        
-        <script src='/js/device.min.js'></script>
-        <script src="/js/script.js"></script>
+    		<script src="/assets/js/packages.js"></script>
+        <script src="/assets/js/theme.js"></script>
+        <script src="/assets/js/map.js"></script>
+        <script src="/assets/js/contact.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="/assets/js/jquery.themepunch.tools.min.js"></script>
+        <script type="text/javascript" src="/assets/js/jquery.themepunch.revolution.min.js"></script>
+        <script type="text/javascript" src="/assets/js/slider-initialization.js"></script>
+        <script type="text/javascript" src="/assets/js/revslider-extensions/revolution.extension.slideanims.min.js"></script>
+        <script type="text/javascript" src="/assets/js/revslider-extensions/revolution.extension.layeranimation.min.js"></script>
+        <script type="text/javascript" src="/assets/js/revslider-extensions/revolution.extension.navigation.min.js"></script>
     		<?php
-    	$scripts = ob_get_contents();
-    	ob_end_clean();
-    	return $scripts;
+        	$scripts = ob_get_contents();
+        	ob_end_clean();
+        	return $scripts;
     }
     
     public function getGoogleAnalytics()
@@ -153,75 +140,68 @@ class Layout_View
     {
         ob_start();
         ?>
-        <!--========================================================
-                              HEADER
-        =========================================================-->
-        <header>
-            <div id="stuck_container" class="stuck_container">
-                <!-- 
-                <div class="brand inset-1">
-                    <h1 class="brand_name">
-                        <a href="index.html">Engraving</a>
-                    </h1>
+        <header class="main-navigation">
+            <div class="container-fluid">
+                <div class="col-md-2">
+                    <a href="/" class="logo">
+                    		<img src="<?php echo $this->data['info']['url']; ?>/assets/images/logo/Footer.svg" alt="Logo" />
+                    	</a>
+                    <div id="navicon">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
                 </div>
-                 -->
-    
-                <nav class="nav inset-2">
-                    <ul class="sf-menu font-menu" data-type="navbar">
-                        <li class="active">
-                            <a href="/">ABOUT US</a>
+                <div class="col-md-10">
+                    <nav>
+                        <ul role="menu">
+                            <li><a href="/">INICIO</a></li>
+                            <li><a href="/acerca-de/">ACERCA DE</a></li>
+                            <li class="dropdown"><a data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"> PORTAFOLIO <span class="dropdown-icon">
+                        <svg width="10" height="7">
+                          <g></g>
+                          <line fill="none" stroke="#fdfdfd" x1="-4.54458" y1="-5.33302" x2="5.38279" y2="4.59435"></line>
+                          <line fill="none" stroke="#fdfdfd" x1="4.67324" y1="4.59752" x2="14.81695" y2="-5.54619"></line>
+                        </svg></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="portfolio.html">MASONRY</a></li>
+                                    <li><a href="portfolio-grid.html">GRID</a></li>
+                                    <li><a href="portfolio-single.html">SINGLE PROJECT</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="services.html">SERVICIOS</a></li>
+                            <li class="dropdown"><a data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"> BLOG <span class="dropdown-icon">
+                        <svg width="10" height="7">
+                          <g></g>
+                          <line fill="none" stroke="#fdfdfd" x1="-4.54458" y1="-5.33302" x2="5.38279" y2="4.59435"></line>
+                          <line fill="none" stroke="#fdfdfd" x1="4.67324" y1="4.59752" x2="14.81695" y2="-5.54619"></line>
+                        </svg></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="blog.html">BLOG</a></li>
+                                    <li><a href="blog-post.html">BLOG POST</a></li>
+                                    <li><a href="blog-sidebar.html">SIDEBAR</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">CONTACTO</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="mobile-navigation vertical-middle text-center">
+                    <ul role="menu" class="text-center">
+                        <li><a href="home.html#!" class="mobile-dropdown">INICIO</a>
+                            <div class="content"><a href="home.html">SLIDER</a><a href="home-video.html">VIDEO</a><a href="home-parallax.html">PARALLAX</a><a href="home-fullscreen.html">FULLSCREEN</a></div>
                         </li>
-                        <li>
-                            <a href="/services/">SERVICES</a>
+                        <li><a href="about.html">Acerca de</a></li>
+                        <li><a href="home.html#!" class="mobile-dropdown">PORTAFOLIO</a>
+                            <div class="content"><a href="portfolio.html">MASONRY</a><a href="portfolio-grid.html">GRID</a><a href="portfolio-single.html">PROJECT POST</a></div>
                         </li>
-                        <li>
-                            <a href="index-1.back.html">GALLERY</a>
+                        <li><a href="services.html">SERVICIOS</a></li>
+                        <li><a href="home.html#!" class="mobile-dropdown">BLOG</a>
+                            <div class="content"><a href="blog.html">BLOG</a><a href="blog-post.html">BLOG POST</a></div>
                         </li>
-                        <!-- <li>
-                            <a href="index-2.html">GALLERY</a>
-                            <ul>
-                                <li>
-                                    <a href="index.html#">Testimonials</a>
-                                </li>
-                                <li>
-                                    <a href="index.html#">Conse ctetur</a>
-                                    <ul>
-                                        <li>
-                                            <a href="index.html#">Lorem</a>
-                                        </li>
-                                        <li>
-                                            <a href="index.html#">Dolor</a>
-                                        </li>
-                                        <li>
-                                            <a href="index.html#">Sit amet</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="index.html#">Do eiusmod</a>
-                                </li>
-                                <li>
-                                    <a href="index.html#">Incididunt ut</a>
-                                </li>
-                                <li>
-                                    <a href="index.html#">Et dolore</a>
-                                </li>
-                                <li>
-                                    <a href="index.html#">Ut enim ad minim</a>
-                                </li>
-                            </ul>
-                        </li> -->
-                        <li>
-                            <a href="index-2.back.html">TESTIMONIALS</a>
-                        </li>
-                        <li>
-                            <a href="index-4.back.html">BLOG</a>
-                        </li>
-                        <li>
-                            <a href="index-4.back.html">CONTACT</a>
-                        </li>
+                        <li><a href="contact.html">CONTACTO</a></li>
                     </ul>
-                </nav>
+                </div>
             </div>
         </header>
         <?php
@@ -234,50 +214,39 @@ class Layout_View
     {
         ob_start();
         ?>
-        <!--========================================================
-                              FOOTER
-        =========================================================-->
         <footer>
-            <section>
-                <div class="container text-center">
-                    <h2 class="small">Follow us</h2>
-                    
-                       <!-- {%FOOTER_LINK} -->
-                    <ul class="inline-list">
-                        <li class="wow fadeInUp" data-wow-delay="0.4s"> 
-                            <a href= "https://web.facebook.com/myperfectweddingmexico/"><img class="social" src="/images/icono-fb.png" alt=""></a>
-                        </li>
-                        <li class="wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="https://www.instagram.com/myperfectweddingmexico/"><img class="social" src="/images/Icono-In.png" alt=""></a>
-                        </li>
-                        <li class="wow fadeInUp" data-wow-delay="0.8s">
-                            <img class="social" src="/images/icono-pn.png" alt=""><a href='index.html#'></a>
-                        </li>
+            <div class="container">
+                <div data-os-animation="fadeInUp" data-os-animation-delay="0s" class="col-md-12 text-center os-animation">
+                    <div class="section-head">
+                        <h4>NEWSLETTER</h4>
+                        <p>Subscribe to our newsletter to receive news, updates and the latest projects we are working on.</p>
+                    </div>
+                </div>
+                <div data-os-animation="fadeInUp" data-os-animation-delay="0s" class="col-md-12 margin-top margin-bottom os-animation">
+                    <form class="newsletter-form text-center">
+                        <input placeholder="YOUR EMAIL ADDRESS..." class="form-control" />
+                        <button type="submit">I'M IN</button>
+                        <div class="col-md-12 text-center margin-top"><small>You have our word, no spam. Ever.</small></div>
+                    </form>
+                </div>
+                <div class="col-md-12 margin-top">
+                    <hr/>
+                </div>
+                <div class="col-md-6 text-left small-screen-text-center">
+                    <div class="footer-message">
+                        <p>2018 © Arian Falcon - Diseñador gráfico</p>
+                    </div>
+                </div>
+                <div class="col-md-6 text-right small-screen-text-center">
+                    <ul class="social-icons">
+                        <!-- <li><a href="https://dribbble.com/session/new">DRIBBBLE</a></li> -->
+                        <li><a href="https://www.behance.net/ArianF">BEHANCE</a></li>
+                        <li><a href="https://www.artstation.com/artwork/gEAOE">ARTSTATION</a></li>
+                        <li><a href="https://www.facebook.com/arian.diseno">FACEBOOCK</a></li>
                     </ul>
                 </div>
-            </section>
+            </div>
         </footer>
-        <!-- 
-        <footer>
-            <section>
-                <div class="container text-center">
-                    <h2 class="small">Follow us</h2>
-                    
-                       
-                    <ul class="inline-list">
-                        <li class="wow fadeInUp" data-wow-delay="0.4s"> 
-                            <a href= "https://web.facebook.com/myperfectweddingmexico/"><img class="social" src="/images/icono-fb.png" alt=""></a>
-                        </li>
-                        <li class="wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="https://www.instagram.com/myperfectweddingmexico/"><img class="social" src="/images/Icono-In.png" alt=""></a>
-                        </li>
-                        <li class="wow fadeInUp" data-wow-delay="0.8s">
-                            <img class="social" src="/images/icono-pn.png" alt=""><a href='index.html#'></a>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </footer> -->
         <?php
         $footer = ob_get_contents();
         ob_end_clean();
@@ -324,154 +293,138 @@ class Layout_View
         return $method;
     }
     
-    public function getIndexWelcome()
+    public function getIndexSlider()
     {
         ob_start();
         ?>
-        <section class="well__off-1 well__off-2">
-            <div class="container text-center wow fadeInUp animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-            		<hr class="rose-index-welcome">
-                <h2 class="small">Welcome</h2>
-                <p class="off inset-5"></p>
-                <p class="off inset-5 regular-font"> Welcome to our site - Have a look around & begin to envision the wedding of your dreams!</p>
-				<div class="row">
-                    <div class="col-md-3 col-sm-6 col-offset-xs wow fadeInLeft animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
-                        <div class="text-center">
-                            <img src="<?php echo $this->data['info']['url']; ?>images/home/welcome/1OUR-SERVICES-01.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-offset-xs wow fadeInLeft animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
-                        <div class="text-center">
-                            <img src="<?php echo $this->data['info']['url']; ?>images/home/welcome/2Meet-Michelle-01.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-offset-xs wow fadeInLeft animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
-                        <div class="text-center">
-                            <img src="<?php echo $this->data['info']['url']; ?>images/home/welcome/3GALLERY-01.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-offset-xs wow fadeInLeft animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
-                        <div class="text-center">
-                            <img src="<?php echo $this->data['info']['url']; ?>images/home/welcome/4LoveStories-01.jpg" alt="">
-                        </div>
-                    </div>
+        <div id="home-slider">
+            <div class="rev_slider_wrapper header-introduction text-center">
+                <div id="rev_slider_1" data-version="5.0" class="rev_slider">
+                    <ul>
+                        <li data-transition="slideoverup"><img src="<?php echo $this->data['info']['url']; ?>/assets/images/splash-image-11.jpg" alt="Slider Image" width="1920" height="1000" />
+                            <div data-x="center" data-y="center" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="y:50;opacity:0s:400;s:400;e:Power2.easeInOut;" data-transform_out="y:+350;opacity:0s:400;s:400;e:Power2.easeInOut;" data-start="500" class="tp-caption caption-classic">
+                                <h2>AVOIR</h2>
+                            </div>
+                        </li>
+                        <li data-transition="slideoverup"><img src="<?php echo $this->data['info']['url']; ?>/assets/images/splash-image-1.jpg" alt="Slider Image" width="1920" height="1000" />
+                            <div data-x="center" data-y="center" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="y:50;opacity:0s:400;s:400;e:Power2.easeInOut;" data-transform_out="x:-150;opacity:0s:400;s:400;e:Power2.easeInOut;" data-start="500" class="tp-caption caption-bordered"><span>CREATIVE DESIGN FIRM</span>
+                                <h2>WELCOME</h2><a href="portfolio.html" class="btn btn-link">PORTFOLIO</a>
+                            </div>
+                        </li>
+                        <li data-transition="slideoverup"><img src="<?php echo $this->data['info']['url']; ?>/assets/images/splash-image-7.jpg" alt="Slider Image" width="1920" height="700" />
+                            <div data-x="center" data-y="middle" data-whitespace="normal" data-transform_idle="o:1;" data-transform_in="y:50;opacity:0s:400;s:400;e:Power2.easeInOut;" data-transform_out="opacity:0s:400;s:400;e:Power2.easeInOut;" data-start="500" class="tp-caption caption-classic">
+                                <h2>AMAZING</h2><img src="<?php echo $this->data['info']['url']; ?>/assets/images/section-decor-white.png" width="40" alt="Divider" />
+                                <p> Welcome to our studio. We are a passionated group of people, making high quality products designed to make your life easier.</p><a href="about.html" class="btn btn-white">ABOUT</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
         <?php
         $method = ob_get_contents();
         ob_end_clean();
         return $method;
     }
     
-    public function getIndexPreAbout()
+    public function getIndexCovers()
     {
         ob_start();
         ?>
-        <section class="well__off-1 well__off-3">
-        		
-            <div class="container text-center wow fadeInUp animated" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-				
-				<div class="img-rose-index-pre-about">
-					<img class="" src="/images/home/rose-index-pre-about.svg">
-				</div>
-				<div class="row">
-                    <div class="no-margin col-md-5 col-sm-5 col-offset-xs wow fadeInLeft animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
-                        <div class="photo-side">
-                            <img src="<?php echo $this->data['info']['url']; ?>images/home/pre-about/my-perfect-wedding-pre-about.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-7 col-sm-5 col-offset-xs wow fadeInLeft animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
-                        <div class="text-center text-side ">
-                            <h2 class="inner-headers">MICHELLE SALAZAR</h2>
-                            <h3 class="overload">Wedding planner</h3>
-                            <p class="off inset-5">
-                                
-                            </p>
-            
-                            <p class="off regular-font text-justify"> 
-                            		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="col-md-12 border-art"></div>
-                </div>
-            </div>
-        </section>
-        <?php
-        $method = ob_get_contents();
-        ob_end_clean();
-        return $method;
-    }
-    
-    public function getIndexContact()
-    {
-        ob_start();
-        ?>
-        <section class="bg-rosa">
-        		<div class="img-rose-index-contact">
-					<img class="" src="/images/home/D.svg">
-				</div>
-            <div class="container">
-                <h2 class="overload-section-title-left" >Contact us</h2>
-                
-                
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <p class="font-menu">Get in touch, tell us more about your wedding plans</p>
-                        <form class='mailform' method="post" action="/bat/rd-mailform.php">
-                            <input type="hidden" name="form-type" value="contact"/>
-                            <fieldset>
-                                <div class="mailform-wrap">
-                                    <label data-add-placeholder>
-                                        <input type="text"
-                                               name="name"
-                                               placeholder="Name*:"
-                                               data-constraints="@LettersOnly @NotEmpty"/>
-                                    </label>
-            
-                                    <label data-add-placeholder>
-                                        <input type="text"
-                                               name="email"
-                                               placeholder="E-mail*:"
-                                               data-constraints="@Email @NotEmpty"/>
-                                    </label>
-                                    <br><br>
-                                    <div class="numero">
-                                    <label  data-add-placeholder>
-                                        <input type="text"
-                                               name="Wedding date:"
-                                               placeholder="Wedding date:"
-                                               data-constraints="@Phone @NotEmpty"/>
-                                    </label>
-                                        </div>
-                                    <br><br><br>
-                                    <div class="margen">
-                                    <label data-add-placeholder>
-                                        <input type="text"
-                                               name="Type of ceremony:"
-                                               placeholder="Type of ceremony:"
-                                               data-constraints="@Phone @NotEmpty"/>
-                                    </label>
-                                        </div>
-
-
-                                </div>
-                                <label data-add-placeholder>
-                                    <textarea name="How do you envision your perfect wedding?:" placeholder="How do you envision your perfect wedding?:"
-                                              data-constraints="@NotEmpty"></textarea>
-                                </label>
-
-                                <div class="wrapper">
-                                    <p class="prefix-1"></p>
-                                    <div class="mfControls">
-                                        <button class="btn btn-md btn-default" type="submit">Submit</button>
+        <section class="section section-white">
+            <div class="container-fluid">
+                <div class="col-md-10 col-md-offset-1">
+                    <ul class="masonry-wrap">
+                        <li data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-lg-6 os-animation">
+                            <div class="masonry-item background-color-1">
+                            		<img src="<?php echo $this->data['info']['url']; ?>/assets/images/portfolio-big-1.jpg" alt="Portfolio-image" />
+                                <div class="masonry-item-overlay">
+                                    <div class="masonry-item-overlay-inner">
+                                        <h2>PENCIL</h2>
+                                        <p>ILLUSTRATION</p>
                                     </div>
                                 </div>
-                            </fieldset>
-                        </form>
-                    </div>
+                            </div>
+                        </li>
+                        <li data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-lg-6 os-animation">
+                            <div class="masonry-item background-color-4">
+                                <a href="portfolio-single.html">
+                                		<img src="<?php echo $this->data['info']['url']; ?>/assets/images/portfolio-1.jpg" alt="Portfolio-image" />
+                                    <div class="masonry-item-overlay">
+                                        <div class="masonry-item-overlay-inner">
+                                            <h2>COVER</h2>
+                                            <p>PRINT</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-lg-6 os-animation">
+                            <div class="masonry-item background-color-2">
+                                <a href="portfolio-single.html">
+                                		<img src="<?php echo $this->data['info']['url']; ?>/assets/images/portfolio-2.jpg" alt="Portfolio-image" />
+                                    <div class="masonry-item-overlay">
+                                        <div class="masonry-item-overlay-inner">
+                                            <h2>MAGAZINE</h2>
+                                            <p>PRINT</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-lg-12 os-animation">
+                            <div class="masonry-item background-color-5">
+                                <a href="portfolio-single.html">
+                                		<img src="<?php echo $this->data['info']['url']; ?>/assets/images/portfolio-big-2.jpg" alt="Portfolio-image" />
+                                    <div class="masonry-item-overlay">
+                                        <div class="masonry-item-overlay-inner">
+                                            <h2>BRANDING</h2>
+                                            <p>WEB</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-lg-6 os-animation">
+                            <div class="masonry-item background-color-2">
+                                <a href="portfolio-single.html">
+                                		<img src="<?php echo $this->data['info']['url']; ?>/assets/images/portfolio-big-3.jpg" alt="Portfolio-image" />
+                                    <div class="masonry-item-overlay">
+                                        <div class="masonry-item-overlay-inner">
+                                            <h2>NINE</h2>
+                                            <p>ILLUSTRATION</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-lg-6 os-animation">
+                            <div class="masonry-item background-color-4">
+                                <a href="portfolio-single.html">
+                                		<img src="<?php echo $this->data['info']['url']; ?>/assets/images/portfolio-3.jpg" alt="Portfolio-image" />
+                                    <div class="masonry-item-overlay">
+                                        <div class="masonry-item-overlay-inner">
+                                            <h2>LETTERS</h2>
+                                            <p>WEB</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-lg-6 os-animation">
+                            <div class="masonry-item background-color-3">
+                                <a href="portfolio-single.html">
+                                		<img src="<?php echo $this->data['info']['url']; ?>/assets/images/portfolio-big-4.jpg" alt="Portfolio-image" />
+                                    <div class="masonry-item-overlay">
+                                        <div class="masonry-item-overlay-inner">
+                                            <h2>POSTER</h2>
+                                            <p>PRINT</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -481,41 +434,29 @@ class Layout_View
         return $method;
     }
     
-    public function getIndexGallery()
+    public function getIndexClients()
     {
         ob_start();
         ?>
-        <section class="well-2 bg-rosa">
-            <div class="float-box container">
-                <div class="wow fadeIn" data-wow-delay="0.4s">
-                    <a class="thumb" href="<?php echo $this->data['info']['url']; ?>/images/home/1IG_Home.png" data-gallery="1">
-                        <img src="<?php echo $this->data['info']['url']; ?>images/home/gallery/1IG_Home.png" alt=""/>
-                        <span class="thumb_overlay"></span>
-                    </a>
+        <section class="section section-black">
+            <div class="container">
+                <div class="container banner">
+                <div class="col-md-12 text-center"><span></span>
+                    <h2></h2><img src="/assets/images/logo/Head.svg" width="500" alt="Divider" />
                 </div>
-                <div class="wow fadeIn" data-wow-delay="0.6s">
-                    <a class="thumb" href="<?php echo $this->data['info']['url']; ?>/images/home/gallery/2IG_Home.png" data-gallery="1">
-                        <img src="<?php echo $this->data['info']['url']; ?>images/home/gallery/2IG_Home.png" alt=""/>
-                        <span class="thumb_overlay"></span>
-                    </a>
+                <div class="col-md-12 text-center"><span></span>
+                    <h2></h2><img src="assets/images/section-decor-white.png" width="40" alt="Divider" />
                 </div>
-                <div class="wow fadeIn" data-wow-delay="0.8s">
-                    <a class="thumb" href="<?php echo $this->data['info']['url']; ?>/images/home/gallery/3IG_Home.png" data-gallery="1">
-                        <img src="<?php echo $this->data['info']['url']; ?>images/home/gallery/3IG_Home.png" alt=""/>
-                        <span class="thumb_overlay"></span>
-                    </a>
-                </div>
-                <div class="wow fadeIn" data-wow-delay="0.6s">
-                    <a class="thumb" href="<?php echo $this->data['info']['url']; ?>/images/home/gallery/4IG_Home.png" data-gallery="1">
-                        <img src="<?php echo $this->data['info']['url']; ?>images/home/gallery/4IG_Home.png" alt=""/>
-                        <span class="thumb_overlay"></span>
-                    </a>
-                </div>
-                <div class="wow fadeIn" data-wow-delay="0.4s">
-                    <a class="thumb" href="<?php echo $this->data['info']['url']; ?>/images/home/gallery/5IG_Home.png" data-gallery="1">
-                        <img src="<?php echo $this->data['info']['url']; ?>images/home/gallery/5IG_Home.png" alt=""/>
-                        <span class="thumb_overlay"></span>
-                    </a>
+            </div>
+                <div class="col-md-12 padding-top">
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo1.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.1s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo2.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.2s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo4.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.3s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo3.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo4.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.1s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo1.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.2s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo3.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.3s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo2.png" alt="Client logo" /></div>
                 </div>
             </div>
         </section>
@@ -525,189 +466,144 @@ class Layout_View
         return $method;
     }
     
-    public function getSlider()
+    public function getIndexGaleries()
     {
         ob_start();
         ?>
-        <section>
-            <div class="camera_container">
-                <div id="camera" class="camera_wrap">
-                    <div data-src="<?php echo $this->data['info']['url']; ?>/images/page-1_slide01.jpg">
-                        <div class="camera_caption fadeIn">
-                            <div class="container">
-                                <h2>creating beautiful</h2>
-
-                                <h3>engraved products for you</h3>
-
-                                <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor
-                                   incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                   exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                   dolor in reprehenderit in voluptate velit esse.</p>
-                            </div>
+        <section class="section section-semi-white">
+            <div class="col-md-12 text-center section-head padding-bottom">
+            		<small>WE ARE ON</small>
+                <h3>INSTAGRAM</h3>
+                <p>Check out our firm's daily process and routine at instagram. We love to shoot pics, and we think it's fun to share with the world all this positive energy we have.</p>
+            </div>
+            <div class="row-fluid">
+                <ul class="instagram-widget">
+                    <li class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <a href="home.html#!"><img src="<?php echo $this->data['info']['url']; ?>/assets/images/widget-image-1.jpg" alt="Widget Image" /></a>
                         </div>
-                    </div>
-                    <div data-src="<?php echo $this->data['info']['url']; ?>/images/page-1_slide02.jpg">
-                        <div class="camera_caption fadeIn">
-                            <div class="container">
-                                <h2>a full service</h2>
-
-                                <h3>engraving company</h3>
-
-                                <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor
-                                   incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                   exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                   dolor in reprehenderit in voluptate velit esse.</p>
-                            </div>
+                    </li>
+                    <li class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <a href="home.html#!"><img src="<?php echo $this->data['info']['url']; ?>/assets/images/widget-image-2.jpg" alt="Widget Image" /></a>
                         </div>
-                    </div>
+                    </li>
+                    <li class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <a href="home.html#!"><img src="<?php echo $this->data['info']['url']; ?>/assets/images/widget-image-3.jpg" alt="Widget Image" /></a>
+                        </div>
+                    </li>
+                    <li class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <a href="home.html#!"><img src="<?php echo $this->data['info']['url']; ?>/assets/images/widget-image-4.jpg" alt="Widget Image" /></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container">
+                <div class="col-md-12 padding-top text-center">
+                		<a class="btn btn-link">FOLLOW US </a>
                 </div>
             </div>
         </section>
         <?php
-        $slider = ob_get_contents();
+        $method = ob_get_contents();
         ob_end_clean();
-        return $slider;
+        return $method;
     }
     
-    public function getIndexItems()
+    public function getAboutBreadCrumb()
     {
         ob_start();
         ?>
-        <section class="bg-img-primary well">
+        <section style="background-image: url(<?php echo $this->data['info']['url']; ?>/assets/images/splash-image-2.jpg)" class="header-introduction-small text-center background-image">
+            <div class="container vertical-middle">
+                <div class="row section-head section-head-white">
+                    <h2>ABOUT</h2>
+                    <ul class="breadcrumb">
+                        <li><a href="home.html">AVOIR</a></li>
+                        <li><a href="about.html#!">ABOUT</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <?php
+        $method = ob_get_contents();
+        ob_end_clean();
+        return $method;
+    }
+    
+    public function getAboutDescription()
+    {
+        ob_start();
+        ?>
+        <section class="section section-white">
+            <div class="container">
+                <div class="col-md-12 text-center">
+                		<div class="section-head">
+                        <img src="<?php echo $this->data['info']['url']; ?>/assets/images/Inner-large-logo.svg" width="600" alt="Divider" />
+                    </div>
+                    <div class="section-head">
+                        <img src="<?php echo $this->data['info']['url']; ?>/assets/images/section-decor-black.png" width="40" alt="Divider" />
+                    </div>
+                </div>
+                <div data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-md-12 text-block text-center">
+                    <h4 class="os-animation">A STUDIO WITH FILLED WITH AMAZING PEOPLE</h4>
+                    <p class="os-animation">You'll brought also divided every it him saying. Days spirit whales every fruit moving. Over land herb multiply moveth give bring thing blessed also whales unto. Air, were land she'd waters. Gathered Behold fifth created fifth great let let unto that moveth the life bring made. And shall isn't. And moved called spirit seed female darkness first you'll subdue lesser bring cattle stars also he to multiply one kind signs earth fly so open Creeping it them. Itself two had be after bring void him tree she'd, for of was green. Abundantly it bring fourth. Bring for i face living.</p>
+                    <p class="os-animation">Given man days of for blessed spirit winged appear moveth beginning and gathering. Gathered meat seed, creepeth won't subdue Upon two of together that fifth also whales called replenish moved over rule two yielding third beast i day you'll great evening. Female female day seas yielding to deep of. For Greater female midst of beast she'd brought set image moving.</p>
+                    <h4 class="os-animation">OUR ONLY TARGET: BUILD GREAT THINGS</h4>
+                    <p class="os-animation">Great image there after Night earth god fowl, it female kind earth seasons give. And green said sixth whose without lights land own give, signs every void rule green he man. Whales creepeth have yielding isn't divided forth bring all god stars creature, so, own brought third seasons life every beast in greater life fish from seasons air subdue fill creature, is, rule, cattle. Shall given him grass tree fruitful.</p>
+                    <div class="signature"><img src="<?php echo $this->data['info']['url']; ?>/assets/images/signature.png" width="150" alt="Signature" /><span>ARIAN El PUERCO FALCON<small>FOUNDER</small></span></div>
+                </div>
+            </div>
+        </section>
+        <?php
+        $method = ob_get_contents();
+        ob_end_clean();
+        return $method;
+    }
+    
+    public function getAboutProcess()
+    {
+        ob_start();
+        ?>
+        <section class="section section-black">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-sm-6 col-offset-xs wow fadeInLeft" data-wow-delay="0.8s">
-                        <div class="text-center">
-                            <img src="images/page-1_img01.jpg" alt=""/>
-
-                            <h4>welcome</h4>
-                            <h5>to our company</h5>
-
-                            <p class="inset-3">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod
-                                               tempor
-                                               incididunt ut
-                                               labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                               exercitation ullamco
-                                               laboris
-                                               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                               reprehenderit in
-                                               voluptate
-                                               velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                               occaecat cupidatat non
-                                               proident.</p>
+                    <div class="col-md-24 text-center margin-bottom">
+                        <div class="section-head"><span>THE DESIGN &amp; DEVELOP</span>
+                            <h3>PROCESS</h3><img src="<?php echo $this->data['info']['url']; ?>/assets/images/section-decor-white.png" width="40" alt="Divider" />
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-6 wow fadeInLeft" data-wow-delay="0.6s">
-                        <div class="text-center">
-                            <img src="images/page-1_img02.jpg" alt=""/>
-
-                            <h4>about</h4>
-                            <h5>our company</h5>
-
-                            <p class="inset-3">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod
-                                               tempor
-                                               incididunt ut
-                                               labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                               exercitation ullamco
-                                               laboris
-                                               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                               reprehenderit in
-                                               voluptate
-                                               velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                               occaecat cupidatat non
-                                               proident.</p>
-                        </div>
+                    <div class="col-md-4 content-block margin-top"><span>.01</span>
+                        <div><i class="icon-basic-archive-full"></i></div>
+                        <h2>RESEARCH &AMP; PLAN</h2>
+                        <p>Before we touch our keyboards, we discover and we plan on a paper the key elements we need to focus, and all the factors that matters for your case.</p>
                     </div>
-                    <div class="col-md-4 col-sm-6 col-md-offset-0 col-sm-offset-3 wow fadeInLeft" data-wow-delay="0.4s">
-                        <div class="text-center">
-                            <img src="images/page-1_img03.jpg" alt=""/>
-
-                            <h4>special</h4>
-                            <h5>offers</h5>
-
-                            <p class="inset-3">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod
-                                               tempor
-                                               incididunt ut
-                                               labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                               exercitation ullamco
-                                               laboris
-                                               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                               reprehenderit in
-                                               voluptate
-                                               velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                               occaecat cupidatat non
-                                               proident.</p>
-                        </div>
+                    <div class="col-md-4 content-block margin-top"><span>.02</span>
+                        <div><i class="icon-basic-pencil-ruler"></i></div>
+                        <h2>DESIGN &amp; DEVELOP</h2>
+                        <p>Now it's the creative time for our team. After all the research - we carefully craft the requested project making sure it meets all the modern web &amp; technology standards.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-        <?php
-        $method = ob_get_contents();
-        ob_end_clean();
-        return $method;
-    }
-    
-    
-    
-    public function getRule()
-    {
-        ob_start();
-        ?>
-        <section class="container">
-            <hr>
-        </section>
-        <?php
-        $method = ob_get_contents();
-        ob_end_clean();
-        return $method;
-    }
-    
-    public function getServiceSectionOne()
-    {
-        ob_start();
-        ?>
-        <section class="bg-less-rosa">
-            <div class="container">
-            		<img src="/images/my-perfect-wedding-services-quote.png" alt="" />
-            </div>
-        </section>
-        <?php
-        $slider = ob_get_contents();
-        ob_end_clean();
-        return $slider;
-    }
-    
-    public function getServicesPolaroids()
-    {
-        ob_start();
-        ?>
-        <section class="bg-img-index-section-one well-4 bg-rosa">
-            <div class="container">
-                <div class="row">
-                    <div class="posicion col-md-3 col-md-offset-1 col-sm-6 col-offset-xs wow fadeInLeft" data-wow-delay="0.8s">
-						<div class="polaroid">
-                            <div class="text-center">
-                             <a href="#"><img src="/images/michelle-about-me-polaroid.jpg" alt=""></a>
-                                <h2 class="small">Wedding Planning</h2>
-                            </div>
-                        </div>
+                    <div class="col-md-4 content-block margin-top"><span>.03</span>
+                        <div><i class="icon-basic-key"></i></div>
+                        <h2>DELIVER</h2>
+                        <p>When it all ends, we are double checking that everything works as they should, and we will simply arrange a meeting to demonstrate, teach you how to use the product and deliver it.</p>
                     </div>
-                    <div class="col-md-4 col-sm-6 wow fadeInLeft" data-wow-delay="0.6s">
-                    		<div class="polaroid-big">
-                            <div class="text-center">
-                                <img src="/images/michelle-services-polaroid.jpg" alt=""/>
-                                <h2 class="small">Vendor Liasom</h2>
-                            </div>
-                        </div>
+                    <div class="col-md-4 content-block margin-top"><span>.03</span>
+                        <div><i class="icon-basic-key"></i></div>
+                        <h2>DELIVER</h2>
+                        <p>When it all ends, we are double checking that everything works as they should, and we will simply arrange a meeting to demonstrate, teach you how to use the product and deliver it.</p>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-md-offset-0 col-sm-offset-3 wow fadeInLeft" data-wow-delay="0.4s">
-                    		<div class="polaroid">
-                            <div class="text-center">
-                                <a href="#"><img src="/images/michelle-our-work-polaroid.jpg" alt=""></a>
-                                <h2 class="small">Wedding Locations</h2>
-                            </div>
-                        </div>
+                    <div class="col-md-4 content-block margin-top"><span>.03</span>
+                        <div><i class="icon-basic-key"></i></div>
+                        <h2>DELIVER</h2>
+                        <p>When it all ends, we are double checking that everything works as they should, and we will simply arrange a meeting to demonstrate, teach you how to use the product and deliver it.</p>
+                    </div>
+                    <div class="col-md-4 content-block margin-top"><span>.03</span>
+                        <div><i class="icon-basic-key"></i></div>
+                        <h2>DELIVER</h2>
+                        <p>When it all ends, we are double checking that everything works as they should, and we will simply arrange a meeting to demonstrate, teach you how to use the product and deliver it.</p>
                     </div>
                 </div>
             </div>

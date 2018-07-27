@@ -21,7 +21,7 @@ Main Theme JS file
 			$('.loader-logo').addClass("slideOutUp");
 			$('.loader').addClass("slideOutUp");
 			$('body').addClass("body-animated");
-		}, 900);
+		}, 100);
 	});
 })(jQuery)
 

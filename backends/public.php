@@ -48,10 +48,10 @@ class generalBackend
 		        );
             break;
             
-		    case 'services':
-		        $seoArray = array(
-		        'title' => "Services",
-		        'author' => "Michelle",
+		    case 'about':
+		        $data['seo'] = array(
+		        'title' => "Acerca de ",
+		        'author' => "Arian Falcon",
 		        'description' => "description",
 		        'subject' => "subject",
 		        'keywords' => "keywords"

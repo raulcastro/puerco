@@ -953,7 +953,7 @@ time, mark, audio, video {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #2A2826;
+  background-color: #000000;
   z-index: 999999;
 }
 

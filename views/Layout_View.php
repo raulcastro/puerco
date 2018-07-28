@@ -451,12 +451,12 @@ class Layout_View
                 <div class="col-md-12 padding-top">
                     <div data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo1.png" alt="Client logo" /></div>
                     <div data-os-animation="fadeIn" data-os-animation-delay="0.1s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo2.png" alt="Client logo" /></div>
-                    <div data-os-animation="fadeIn" data-os-animation-delay="0.2s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo4.png" alt="Client logo" /></div>
-                    <div data-os-animation="fadeIn" data-os-animation-delay="0.3s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo3.png" alt="Client logo" /></div>
-                    <div data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo4.png" alt="Client logo" /></div>
-                    <div data-os-animation="fadeIn" data-os-animation-delay="0.1s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo1.png" alt="Client logo" /></div>
-                    <div data-os-animation="fadeIn" data-os-animation-delay="0.2s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo3.png" alt="Client logo" /></div>
-                    <div data-os-animation="fadeIn" data-os-animation-delay="0.3s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo2.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.2s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo3.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.3s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top os-animation"><img src="assets/images/logo4.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo5.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.1s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo6.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.2s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo7.png" alt="Client logo" /></div>
+                    <div data-os-animation="fadeIn" data-os-animation-delay="0.3s" class="col-md-3 col-sm-6 col-xs-6 small-screen-margin-top margin-top padding-top os-animation"><img src="assets/images/logo8.png" alt="Client logo" /></div>
                 </div>
             </div>
         </section>
